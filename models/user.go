@@ -10,7 +10,6 @@ type User struct {
 	Token			  string `bson:"token" json:"token"`
 }
 
-//creatring new user
 func NewUser(email, password string) (*User, error){
 	epw, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
@@ -22,7 +21,7 @@ func NewUser(email, password string) (*User, error){
 	}, nil
 }
 
-// creating new admin
+
 func NewAdminUser(email, password string) (*User, error){
 	user, err := NewUser(email,password)
 	if err != nil {
@@ -32,7 +31,6 @@ func NewAdminUser(email, password string) (*User, error){
 	return user, nil
 }
 
-//validating password
 func (u *User) ValidatePassword(pw string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte(pw))
 	return err == nil
