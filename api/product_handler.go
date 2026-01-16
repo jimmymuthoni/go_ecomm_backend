@@ -43,3 +43,13 @@ func (h *ProductHandler) HandleGetProducts(c *weavebox.Context) error{
 	return c.JSON(http.StatusOK, products)
 }
 
+
+func (h *ProductHandler) HandleGetProductByID(c *weavebox.Context) error {
+	id := c.Param("id")
+
+	product,err := h.store.GetByID(c.Context, id)
+	if err !=nil {
+		return err
+	}
+	return c.JSON(http.StatusOK,product)
+}
