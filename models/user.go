@@ -34,6 +34,6 @@ func NewAdminUser(email, password string) (*User, error){
 
 //validating password
 func (u *User) ValidatePassword(pw string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte[pw])
+	err := bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte(pw))
 	return err == nil
 }
