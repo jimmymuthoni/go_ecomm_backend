@@ -22,3 +22,18 @@ func NewUser(email, password string) (*User, error){
 	}, nil
 }
 
+// creating new admin
+func NewAdminUser(email, password string) (*User, error){
+	user, err := NewUser(email,password)
+	if err != nil {
+		return nil, err
+	}
+	user.IsAdmin = true
+	return user, nil
+}
+
+//validating password
+func (u *User) ValidatePassword(pw string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(u.EncryptedPassword), []byte[pw])
+	return err == nil
+}
