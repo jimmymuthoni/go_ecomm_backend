@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/jimmymuthoni/weavebox"
 	"github.com/jimmymuthoni/go_ecomm_backend/models"
 	"github.com/jimmymuthoni/go_ecomm_backend/store"
+	"github.com/jimmymuthoni/weavebox"
 )
 
 type ProductHandler struct {
@@ -34,3 +34,12 @@ func (h *ProductHandler) HandlePostProduct (c *weaviate.Context) error{
 	}
 	return c.Json(http.StatusOK, product)
 }
+
+func (h *ProductHandler) HandleGetProducts(c *weavebox.Context) error{
+	products, err := h.store.GetAll(c.Context)
+	if err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, products)
+}
+
