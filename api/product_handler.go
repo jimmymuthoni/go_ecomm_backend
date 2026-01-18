@@ -6,7 +6,7 @@ import (
 
 	"github.com/jimmymuthoni/go_ecomm_backend/models"
 	"github.com/jimmymuthoni/go_ecomm_backend/store"
-	"github.com/jimmymuthoni/weavebox"
+	"github.com/anthdm/weavebox"
 )
 
 type ProductHandler struct {
@@ -19,7 +19,7 @@ func NewProductHandler(pStore store.ProductStorer) *ProductHandler {
 	}
 }
 
-func (h *ProductHandler) HandlePostProduct (c *weaviate.Context) error{
+func (h *ProductHandler) HandlePostProduct (c *weavebox.Context) error{
 	productReq := &models.CreateProductRequest{}
 	if err := json.NewDecoder(c.Request().Body).Decode(productReq); err != nil {
 		return err
@@ -32,7 +32,7 @@ func (h *ProductHandler) HandlePostProduct (c *weaviate.Context) error{
 	if err := h.store.Insert(c.Context, product); err != nil {
 		return err
 	}
-	return c.Json(http.StatusOK, product)
+	return c.JSON(http.StatusOK, product)
 }
 
 func (h *ProductHandler) HandleGetProducts(c *weavebox.Context) error{
