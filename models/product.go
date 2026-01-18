@@ -20,7 +20,6 @@ type CreateProductRequest struct {
 	Name string	`json:"name"`
 }
 
-//function to create new product from the request
 func NewProductFromRequest(req *CreateProductRequest) (*Product, error){
 	if err := validateCreateProductRequest(req); err != nil {
 		return nil, err
@@ -36,7 +35,6 @@ func NewProductFromRequest(req *CreateProductRequest) (*Product, error){
 	}, nil
 }
 
-// function to validate the product to create
 func validateCreateProductRequest(req *CreateProductRequest) error {
 	if len(req.SKU) < 3 {
 		return fmt.Errorf("The SKU of the product is short")
